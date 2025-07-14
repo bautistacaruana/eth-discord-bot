@@ -7,7 +7,6 @@ const client = new Client({
 
 client.once("ready", () => {
   console.log(`Conectado como ${client.user.tag}`);
-
   setInterval(async () => {
     try {
       const res = await axios.get("https://api.coingecko.com/api/v3/simple/price?ids=ethereum&vs_currencies=usd");
@@ -15,12 +14,11 @@ client.once("ready", () => {
         style: "currency",
         currency: "USD",
       });
-
-      await client.user.setActivity(`ETH: ${ethPrice}`, { type: 3 }); // type 3 = Watching
+      await client.user.setActivity(`ETH: ${ethPrice}`, { type: 3 }); // 3 = Watching
     } catch (err) {
       console.error("Error al obtener el precio:", err);
     }
-  }, 60 * 1000); // cada 60 segundos
+  }, 60 * 1000); // Cada 60 segundos
 });
 
-client.login(process.env.DISCORD_TOKEN);
+client.login(process.env.TOKEN);
